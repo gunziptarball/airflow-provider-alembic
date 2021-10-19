@@ -1,0 +1,7 @@
+pytest
+pyhamcrest
+matchmock
+pytest-mock
+pytest-mockito
+black
+isort
