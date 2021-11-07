@@ -5,6 +5,7 @@ The current implementation of Alembic operators includes:
 
 - `AlembicBaseOperator` - Provides DAG node for Airflow
 - `AlembicUpgradeOperator` - Wraps `alembic.command.upgrade` 
+- `AlembicDowngradeOperator` - Wraps `alembic.command.downgrade`
 
 
 ### Development
