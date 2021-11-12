@@ -6,6 +6,7 @@ import pytest
 from alembic_provider.operators.alembic_operator import (
     AlembicBaseOperator,
     AlembicUpgradeOperator,
+    AlembicDowngradeOperator,
 )
 
 
@@ -53,4 +54,18 @@ class TestAlembicUpgradeOperator:
         )
         when(task).get_config().thenReturn(cfg)
         when(alembic.command).upgrade(cfg, "ae1234")
+        task.execute({})
+
+
+class TestAlembicDowngradeOperator:
+    def test_execute(self, when, mocker):
+        cfg = mocker.Mock
+        task = AlembicDowngradeOperator(
+            task_id="downgrade_db",
+            conn_id="some_connection",
+            script_location="some/location",
+            revision="ae1234"
+        )
+        when(task).get_config().thenReturn(cfg)
+        when(alembic.command).downgrade(cfg, "ae1234")
         task.execute({})

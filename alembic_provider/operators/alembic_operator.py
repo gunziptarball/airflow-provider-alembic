@@ -45,3 +45,14 @@ class AlembicUpgradeOperator(AlembicBaseOperator):
 
     def execute(self, context):
         alembic.command.upgrade(self.get_config(), self.revision)
+
+
+class AlembicDowngradeOperator(AlembicBaseOperator):
+    template_fields = AlembicBaseOperator.template_fields + ("revision", )
+
+    def __init__(self, *, revision: str, **kwargs):
+        self.revision = revision
+        super().__init__(**kwargs)
+
+    def execute(self, context):
+        alembic.command.downgrade(self.get_config(), self.revision)
